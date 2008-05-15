@@ -23,4 +23,4 @@ requires:
   POE::Wheel::ReadWrite: 0
   POE::Wheel::SocketFactory: 0
   perl: 5.6.0
-version: 0.02
+version: 0.04

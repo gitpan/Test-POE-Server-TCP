@@ -1,5 +1,9 @@
 Test::POE::Server::TCP
 ======================
 
+0.04	Thu May 15 09:43:37 BST 2008
+	- Updated LICENSE file
+	- added 'terminate' method and input event.
+
 0.02	Wed May 14 21:42:39 BST 2008
 	- Initial CPAN release.

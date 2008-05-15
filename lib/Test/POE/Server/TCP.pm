@@ -7,7 +7,7 @@ use Socket;
 use Carp qw(carp croak);
 use vars qw($VERSION);
 
-$VERSION = '0.02';
+$VERSION = '0.04';
 
 sub spawn {
   my $package = shift;
@@ -22,6 +22,7 @@ sub spawn {
 		      send_event     => '__send_event',
 		      send_to_client => '_send_to_client',
 		      disconnect     => '_disconnect',
+		      terminate      => '_terminate',
 	            },
 	   $self => [ qw(_start register unregister _accept_client _accept_failed _conn_input _conn_error _conn_flushed _conn_alarm _send_to_client __send_event _disconnect) ],
 	],
@@ -206,6 +207,18 @@ sub _disconnect {
   my ($kernel,$self,$id) = @_[KERNEL,OBJECT,ARG0];
   return unless $self->_conn_exists( $id );
   $self->{clients}->{ $id }->{quit} = 1;
+  return 1;
+}
+
+sub terminate {
+  my $self = shift;
+  $poe_kernel->call( $self->{session_id}, '_terminate', @_ );
+}
+
+sub _terminate {
+  my ($kernel,$self,$id) = @_[KERNEL,OBJECT,ARG0];
+  return unless $self->_conn_exists( $id );
+  delete $self->{clients}->{ $id };
   return 1;
 }
 
@@ -554,6 +567,10 @@ Send some output to a connected client. First parameter must be a valid client i
 
 Places a client connection in pending disconnect state. Requires a valid client ID as a parameter. Set this, then send an applicable message to the client using send_to_client() and the client connection will be terminated.
 
+=item terminate
+
+Immediately disconnects a client conenction. Requires a valid client ID as a parameter.
+
 =item getsockname
 
 Access to the L<POE::Wheel::SocketFactory> method of the underlying listening socket.
@@ -592,6 +609,10 @@ Second parameter is a string of text to send.
 =item disconnect
 
 Places a client connection in pending disconnect state. Requires a valid client ID as a parameter. Set this, then send an applicable message to the client using send_to_client() and the client connection will be terminated.
+
+=item terminate
+
+Immediately disconnects a client conenction. Requires a valid client ID as a parameter.
 
 =back
 
