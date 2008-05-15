@@ -1,6 +1,9 @@
 Test::POE::Server::TCP
 ======================
 
+0.06	Thu May 15 16:54:07 BST 2008
+	- updated authorship and licensing information
+
 0.04	Thu May 15 09:43:37 BST 2008
 	- Updated LICENSE file
 	- added 'terminate' method and input event.

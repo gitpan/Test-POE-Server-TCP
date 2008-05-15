@@ -7,7 +7,7 @@ use Socket;
 use Carp qw(carp croak);
 use vars qw($VERSION);
 
-$VERSION = '0.04';
+$VERSION = '0.06';
 
 sub spawn {
   my $package = shift;
@@ -655,9 +655,13 @@ Generated whenever anything we send to the client is actually flushed down the '
 
 =head1 AUTHOR
 
+Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
+
+with code borrowed from L<POE::Component::Server::TCP> by Rocco Caputo, Ann Barcomb and Jos Boumans.
+
 =head1 LICENSE
 
-Copyright C<(c)> Chris Williams
+Copyright C<(c)> Chris Williams, Rocco Caputo, Ann Barcomb and Jos Boumans.
 
 This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
 
