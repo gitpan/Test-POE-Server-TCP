@@ -7,7 +7,7 @@ use Socket;
 use Carp qw(carp croak);
 use vars qw($VERSION);
 
-$VERSION = '0.06';
+$VERSION = '0.08';
 
 sub spawn {
   my $package = shift;
@@ -200,7 +200,7 @@ sub _accept_failed {
 
 sub disconnect {
   my $self = shift;
-  $poe_kernel->call( $self->{session_id}, '_disconnect', @_ );
+  $poe_kernel->call( $self->{session_id}, 'disconnect', @_ );
 }
 
 sub _disconnect {
@@ -212,13 +212,14 @@ sub _disconnect {
 
 sub terminate {
   my $self = shift;
-  $poe_kernel->call( $self->{session_id}, '_terminate', @_ );
+  $poe_kernel->call( $self->{session_id}, 'terminate', @_ );
 }
 
 sub _terminate {
   my ($kernel,$self,$id) = @_[KERNEL,OBJECT,ARG0];
   return unless $self->_conn_exists( $id );
   delete $self->{clients}->{ $id };
+  $self->_send_event( $self->{_prefix} . 'disconnected', $id );
   return 1;
 }
 
@@ -385,8 +386,8 @@ sub _send_to_client {
 
   if ( ref $output eq 'ARRAY' ) {
     my $first = shift @{ $output };
-    $self->{clients}->{ $id }->{BUFFER} = $output;
-    $self->{clients}->{ $id }->{wheel}->put($first);
+    $self->{clients}->{ $id }->{BUFFER} = $output if scalar @{ $output };
+    $self->{clients}->{ $id }->{wheel}->put($first) if defined $first;
     return 1;
   }
 
@@ -562,6 +563,8 @@ Terminates the component. Shuts down the listener and disconnects connected clie
 =item send_to_client
 
 Send some output to a connected client. First parameter must be a valid client id. Second parameter is a string of text to send.
+The second parameter may also be an arrayref of items to send to the client. If the filter you have used requires an arrayref as
+input, nest that arrayref within another arrayref.
 
 =item disconnect
 

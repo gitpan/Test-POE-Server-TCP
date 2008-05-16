@@ -22,5 +22,6 @@ t/04_multiple.t
 t/05_subclass.t
 t/06_filter.t
 t/07_synopsis.t
+t/08_buffer.t
 t/99_pod.t
 t/99_pod_coverage.t

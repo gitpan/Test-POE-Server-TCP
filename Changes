@@ -1,6 +1,10 @@
 Test::POE::Server::TCP
 ======================
 
+0.08	Fri May 16 10:24:37 BST 2008
+	- Documented passing an ARRAYREF to send_to_client.
+	- Added test for the above.
+
 0.06	Thu May 15 16:54:07 BST 2008
 	- updated authorship and licensing information
 
