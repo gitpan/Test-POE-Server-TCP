@@ -1,6 +1,9 @@
 Test::POE::Server::TCP
 ======================
 
+0.10	Tue May 20 17:33:15 BST 2008
+	- Added client_info() method.
+
 0.08	Fri May 16 10:24:37 BST 2008
 	- Documented passing an ARRAYREF to send_to_client.
 	- Added test for the above.

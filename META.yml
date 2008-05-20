@@ -6,7 +6,7 @@ build_requires:
   Test::More: 0.47
   Text::ParseWords: 0
 distribution_type: module
-generated_by: 'Module::Install version 0.72'
+generated_by: 'Module::Install version 0.73'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.3.html
@@ -16,6 +16,8 @@ no_index:
   directory:
     - inc
     - t
+    - examples
+    - examples
 requires:
   POE: 0
   POE::Filter: 0
@@ -23,4 +25,4 @@ requires:
   POE::Wheel::ReadWrite: 0
   POE::Wheel::SocketFactory: 0
   perl: 5.6.0
-version: 0.08
+version: 0.10

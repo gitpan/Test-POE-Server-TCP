@@ -7,7 +7,7 @@ use Socket;
 use Carp qw(carp croak);
 use vars qw($VERSION);
 
-$VERSION = '0.08';
+$VERSION = '0.10';
 
 sub spawn {
   my $package = shift;
@@ -123,6 +123,16 @@ sub _accept_client {
 
   #$self->{clients}->{ $id }->{alarm} = $kernel->delay_set( '_conn_alarm', $self->{time_out} || 300, $id );
   return;
+}
+
+sub client_info {
+  my $self = shift;
+  my $id = shift || return;
+  return unless $self->_conn_exists( $id );
+  my %hash = %{ $self->{clients}->{ $id } };
+  delete $hash{wheel};
+  return map { $hash{$_} } qw(peeraddr peerport sockaddr sockport) if wantarray;
+  return \%hash;
 }
 
 sub _get_filters {
@@ -565,6 +575,17 @@ Terminates the component. Shuts down the listener and disconnects connected clie
 Send some output to a connected client. First parameter must be a valid client id. Second parameter is a string of text to send.
 The second parameter may also be an arrayref of items to send to the client. If the filter you have used requires an arrayref as
 input, nest that arrayref within another arrayref.
+
+=item client_info
+
+Retrieve socket information of a given client. Requires a valid client ID as a parameter. If called in a list context it returns a list 
+consisting of, in order, the client address, the client TCP port, our address and our TCP port. In a scalar context it returns a HASHREF
+with the following keys:
+
+  'peeraddr', the client address;
+  'peerport', the client TCP port;
+  'sockaddr', our address;
+  'sockport', our TCP port;
 
 =item disconnect
 
