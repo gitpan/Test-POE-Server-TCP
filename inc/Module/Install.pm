@@ -30,7 +30,7 @@ BEGIN {
 	# This is not enforced yet, but will be some time in the next few
 	# releases once we can make sure it won't clash with custom
 	# Module::Install extensions.
-	$VERSION = '0.73';
+	$VERSION = '0.76';
 
 	*inc::Module::Install::VERSION = *VERSION;
 	@inc::Module::Install::ISA     = __PACKAGE__;
@@ -85,7 +85,7 @@ END_DIE
 
 # Build.PL was formerly supported, but no longer is due to excessive
 # difficulty in implementing every single feature twice.
-if ( $0 =~ /Build.PL$/i or -f 'Build.PL' ) { die <<"END_DIE" }
+if ( $0 =~ /Build.PL$/i ) { die <<"END_DIE" }
 
 Module::Install no longer supports Build.PL.
 
@@ -339,13 +339,24 @@ sub _write {
 	close FH or die "close($_[0]): $!";
 }
 
-sub _version {
+sub _version ($) {
 	my $s = shift || 0;
 	   $s =~ s/^(\d+)\.?//;
 	my $l = $1 || 0;
 	my @v = map { $_ . '0' x (3 - length $_) } $s =~ /(\d{1,3})\D?/g;
 	   $l = $l . '.' . join '', @v if @v;
 	return $l + 0;
+}
+
+# Cloned from Params::Util::_CLASS
+sub _CLASS ($) {
+	(
+		defined $_[0]
+		and
+		! ref $_[0]
+		and
+		$_[0] =~ m/^[^\W\d]\w*(?:::\w+)*$/s
+	) ? $_[0] : undef;
 }
 
 1;

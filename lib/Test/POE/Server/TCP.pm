@@ -7,7 +7,7 @@ use Socket;
 use Carp qw(carp croak);
 use vars qw($VERSION);
 
-$VERSION = '0.10';
+$VERSION = '0.12';
 
 sub spawn {
   my $package = shift;
@@ -415,7 +415,83 @@ Test::POE::Server::TCP - A POE Component providing TCP server services for test 
 
 =head1 SYNOPSIS
 
-   # An echo server test
+A very simple echo server with logging of requests by each client:
+
+   use strict;
+   use POE;
+   use Test::POE::Server::TCP;
+
+   POE::Session->create(
+     package_states => [
+   	'main' => [qw(
+   			_start
+   			testd_connected
+   			testd_disconnected
+   			testd_client_input
+   	)],
+     ],
+   );
+   
+   $poe_kernel->run();
+   exit 0;
+   
+   sub _start {
+     # Spawn the Test::POE::Server::TCP server.
+     $_[HEAP]->{testd} = Test::POE::Server::TCP->spawn(
+   	address => '127.0.0.1',
+   	port => 0,
+     );
+     return;
+   }
+   
+   sub testd_connected {
+     my ($heap,$id) = @_[HEAP,ARG0];
+
+     # A client connected the unique ID is in ARG0
+     # Create a blank arrayref for this client on *our* heap
+
+     $heap->{clients}->{ $id } = [ ];
+
+     return;
+   }
+   
+   sub testd_client_input {
+     my ($kernel,$heap,$sender,$id,$input) = @_[KERNEL,HEAP,SENDER,ARG0,ARG1];
+
+     # The client sent us a line of input
+     # lets store it
+
+     push @{ $heap->{clients}->{ $id }, $input;
+
+     # Okay, we are an echo server so lets send it back to the client
+     # We know the SENDER so can always obtain the server object.
+
+     my $testd = $sender->get_heap();
+     $testd->send_to_client( $id, $input );
+
+     # Or even
+
+     # $sender->get_heap()->send_to_client( $id, $input );
+
+     # Alternatively we could just post back to the SENDER
+
+     # $kernel->post( $sender, 'send_to_client', $id, $input );
+
+     return;
+   }
+
+   sub testd_disconnected {
+     my ($heap,$id) = @_[HEAP,ARG0];
+
+     # Client disconnected for whatever reason
+     # We need to free up our storage
+
+     delete $heap->{clients}->{ $id };
+
+     return;
+   }
+
+Using the module in a testcase:
 
    use strict;
    use Test::More;
@@ -438,7 +514,6 @@ Test::POE::Server::TCP - A POE Component providing TCP server services for test 
    			_sock_fail
    			_sock_in
    			_sock_err
-   			testd_registered
    			testd_connected
    			testd_disconnected
    			testd_client_input

@@ -1,6 +1,9 @@
 Test::POE::Server::TCP
 ======================
 
+0.12	Tue Jul 29 11:18:53 BST 2008
+	- Provided a really simple synopsis.
+
 0.10	Tue May 20 17:33:15 BST 2008
 	- Added client_info() method.
 
