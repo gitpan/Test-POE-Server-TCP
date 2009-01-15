@@ -7,7 +7,7 @@ use Socket;
 use Carp qw(carp croak);
 use vars qw($VERSION);
 
-$VERSION = '0.12';
+$VERSION = '0.14';
 
 sub spawn {
   my $package = shift;
@@ -15,7 +15,9 @@ sub spawn {
   $opts{lc $_} = delete $opts{$_} for keys %opts;
   my $options = delete $opts{options};
   my $self = bless \%opts, $package;
-  $self->{_prefix} = 'testd_';
+  $self->{_prefix} = delete $self->{prefix};
+  $self->{_prefix} = 'testd_' unless defined $self->{_prefix};
+  $self->{_prefix} .= '_' unless $self->{_prefix} =~ /\_$/;
   $self->{session_id} = POE::Session->create(
 	object_states => [
 	   $self => { shutdown       => '_shutdown',
@@ -613,7 +615,7 @@ communication with the component when sending data to the client or disconnectin
 
 =over 
 
-=item spawn
+=item C<spawn>
 
 Takes a number of optional arguments:
 
@@ -624,6 +626,7 @@ Takes a number of optional arguments:
   'filter', specify a POE::Filter to use for client connections, default is POE::Filter::Line;
   'inputfilter', specify a POE::Filter for client input;
   'outputfilter', specify a POE::Filter for output to clients;
+  'prefix', specify a different prefix than 'testd' for events;
 
 The semantics for C<filter>, C<inputfilter> and C<outputfilter> are the same as for L<POE::Component::Server::TCP> in that one
 may provide either a C<SCALAR>, C<ARRAYREF> or an C<OBJECT>.
@@ -637,21 +640,21 @@ to receive C<all> events.
 
 =over
 
-=item session_id
+=item C<session_id>
 
 Returns the POE::Session ID of the component.
 
-=item shutdown
+=item C<shutdown>
 
 Terminates the component. Shuts down the listener and disconnects connected clients.
 
-=item send_to_client
+=item C<send_to_client>
 
 Send some output to a connected client. First parameter must be a valid client id. Second parameter is a string of text to send.
 The second parameter may also be an arrayref of items to send to the client. If the filter you have used requires an arrayref as
 input, nest that arrayref within another arrayref.
 
-=item client_info
+=item C<client_info>
 
 Retrieve socket information of a given client. Requires a valid client ID as a parameter. If called in a list context it returns a list 
 consisting of, in order, the client address, the client TCP port, our address and our TCP port. In a scalar context it returns a HASHREF
@@ -662,19 +665,19 @@ with the following keys:
   'sockaddr', our address;
   'sockport', our TCP port;
 
-=item disconnect
+=item C<disconnect>
 
 Places a client connection in pending disconnect state. Requires a valid client ID as a parameter. Set this, then send an applicable message to the client using send_to_client() and the client connection will be terminated.
 
-=item terminate
+=item C<terminate>
 
 Immediately disconnects a client conenction. Requires a valid client ID as a parameter.
 
-=item getsockname
+=item C<getsockname>
 
 Access to the L<POE::Wheel::SocketFactory> method of the underlying listening socket.
 
-=item port 
+=item C<port>
 
 Returns the port that the component is listening on.
 
@@ -686,30 +689,30 @@ These are events that the component will accept:
 
 =over
 
-=item register
+=item C<register>
 
 Takes N arguments: a list of event names that your session wants to listen for, minus the 'testd_' prefix.
 
 Registering for 'all' will cause it to send all TESTD-related events to you; this is the easiest way to handle it.
 
-=item unregister
+=item C<unregister>
 
 Takes N arguments: a list of event names which you don't want to receive. If you've previously done a 'register' for a particular event which you no longer care about, this event will tell the POP3D to stop sending them to you. (If you haven't, it just ignores you. No big deal).
 
-=item shutdown
+=item C<shutdown>
 
 Terminates the component. Shuts down the listener and disconnects connected clients.
 
-=item send_to_client
+=item C<send_to_client>
 
 Send some output to a connected client. First parameter must be a valid client ID. 
 Second parameter is a string of text to send.
 
-=item disconnect
+=item C<disconnect>
 
 Places a client connection in pending disconnect state. Requires a valid client ID as a parameter. Set this, then send an applicable message to the client using send_to_client() and the client connection will be terminated.
 
-=item terminate
+=item C<terminate>
 
 Immediately disconnects a client conenction. Requires a valid client ID as a parameter.
 
@@ -717,36 +720,37 @@ Immediately disconnects a client conenction. Requires a valid client ID as a par
 
 =head1 OUTPUT EVENTS
 
-The component sends the following events to registered sessions:
+The component sends the following events to registered sessions. If you have changed the C<prefix> option in C<spawn> then 
+substitute C<testd> with the event prefix that you specified.
 
 =over
 
-=item testd_registered
+=item C<testd_registered>
 
 This event is sent to a registering session. ARG0 is the Test::POE::Server::TCP object.
 
-=item testd_listener_failed
+=item C<testd_listener_failed>
 
 Generated if the component cannot either start a listener or there is a problem
 accepting client connections. ARG0 contains the name of the operation that failed. 
 ARG1 and ARG2 hold numeric and string values for $!, respectively.
 
-=item testd_connected
+=item C<testd_connected>
 
 Generated whenever a client connects to the component. ARG0 is the client ID, ARG1
 is the client's IP address, ARG2 is the client's TCP port. ARG3 is our IP address and
 ARG4 is our socket port.
 
-=item testd_disconnected
+=item C<testd_disconnected>
 
 Generated whenever a client disconnects. ARG0 is the client ID.
 
-=item testd_client_input
+=item C<testd_client_input>
 
 Generated whenever a client sends us some traffic. ARG0 is the client ID, ARG1 is the data sent ( tokenised by whatever POE::Filter you 
 specified. 
 
-=item testd_client_flushed
+=item C<testd_client_flushed>
 
 Generated whenever anything we send to the client is actually flushed down the 'line'. ARG0 is the client ID.
 
