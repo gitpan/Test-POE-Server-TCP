@@ -1,6 +1,9 @@
 Test::POE::Server::TCP
 ======================
 
+0.16	Sat Jan 17 12:29:04 GMT 2009
+	- Fixed 07_synopsis.t test on Cygwin
+
 0.14	Thu Jan 15 09:43:58 GMT 2009
 	- Enabled 'prefix' to be specified.
 

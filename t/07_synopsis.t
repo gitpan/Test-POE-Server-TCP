@@ -75,6 +75,10 @@ sub _sock_in {
   my $data = shift @{ $heap->{data} };
   ok( $input eq $data, 'Data matched' );
   unless ( scalar @{ $heap->{data} } ) {
+    if ( $^O eq 'cygwin' ) {
+	$heap->{socket}->shutdown_input();
+	$heap->{socket}->shutdown_output();
+    }
     delete $heap->{socket};
     return;
   }
