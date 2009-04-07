@@ -29,4 +29,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: git://github.com/bingos/test-poe-server-tcp.git
-version: 1.00
+version: 1.02
