@@ -23,7 +23,7 @@ no_index:
 provides:
   Test::POE::Server::TCP:
     file: lib/Test/POE/Server/TCP.pm
-    version: 1.06
+    version: 1.08
 requires:
   POE: 1.004
   POE::Filter: 0
@@ -35,4 +35,4 @@ resources:
   homepage: http://github.com/bingos/test-poe-server-tcp/tree
   license: http://dev.perl.org/licenses/
   repository: git://github.com/bingos/test-poe-server-tcp.git
-version: 1.06
+version: 1.08
