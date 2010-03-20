@@ -283,6 +283,10 @@ METHODS
     "port"
         Returns the port that the component is listening on.
 
+    "start_listener"
+        If the listener fails on "listen" you can attempt to restart it with
+        this.
+
 INPUT EVENTS
     These are events that the component will accept:
 
@@ -327,6 +331,10 @@ INPUT EVENTS
         Immediately disconnects a client conenction. Requires a valid client
         ID as a parameter.
 
+    "start_listener"
+        If the listener fails on "listen" you can attempt to restart it with
+        this.
+
 OUTPUT EVENTS
     The component sends the following events to registered sessions. If you
     have changed the "prefix" option in "spawn" then substitute "testd" with
@@ -341,6 +349,9 @@ OUTPUT EVENTS
         is a problem accepting client connections. ARG0 contains the name of
         the operation that failed. ARG1 and ARG2 hold numeric and string
         values for $!, respectively.
+
+        If the operation was "listen", the component will remove the
+        listener. You may attempt to start it again using "start_listener".
 
     "testd_connected"
         Generated whenever a client connects to the component. ARG0 is the
