@@ -2,6 +2,9 @@ NAME
     Test::POE::Server::TCP - A POE Component providing TCP server services
     for test cases
 
+VERSION
+    version 1.12
+
 SYNOPSIS
     A very simple echo server with logging of requests by each client:
 
@@ -359,32 +362,35 @@ OUTPUT EVENTS
         port. ARG3 is our IP address and ARG4 is our socket port.
 
     "testd_disconnected"
-        Generated whenever a client disconnects. ARG0 is the client ID.
+        Generated whenever a client disconnects. ARG0 was the client ID,
+        ARG1 was the client's IP address, ARG2 was the client's TCP port.
+        ARG3 was our IP address and ARG4 was our socket port.
 
     "testd_client_input"
         Generated whenever a client sends us some traffic. ARG0 is the
         client ID, ARG1 is the data sent ( tokenised by whatever POE::Filter
-        you specified.
+        you specified ).
 
     "testd_client_flushed"
         Generated whenever anything we send to the client is actually
         flushed down the 'line'. ARG0 is the client ID.
 
-AUTHOR
-    Chris "BinGOs" Williams <chris@bingosnet.co.uk>
-
-    with code borrowed from POE::Component::Server::TCP by Rocco Caputo, Ann
-    Barcomb and Jos Boumans.
-
-LICENSE
-    Copyright © Chris Williams, Rocco Caputo, Ann Barcomb and Jos Boumans.
-
-    This module may be used, modified, and distributed under the same terms
-    as Perl itself. Please see the license that came with your Perl
-    distribution for details.
+CREDITS
+    This module uses code borrowed from POE::Component::Server::TCP by Rocco
+    Caputo, Ann Barcomb and Jos Boumans.
 
 SEE ALSO
     POE
 
     POE::Component::Server::TCP
+
+AUTHOR
+    Chris Williams <chris@bingosnet.co.uk>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2010 by Chris Williams, Rocco Caputo, Ann
+    Barcomb and Jos Boumans.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
 

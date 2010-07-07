@@ -1,52 +1,47 @@
-Test::POE::Server::TCP
-======================
+==============================
+2010-07-07 11:46:56 +0100 1.12
+==============================
 
-1.10  Sat Mar 20 08:38:14 GMT 2010
-  - Fixed the listener being deleted on all failure operations
-  - added 'start_listener' mechanism.
+  commit 38faf9bb17668dac118fa4d841e19962d32b1de9
+  Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
+  Date:   Wed Jul 7 11:46:56 2010 +0100
+  
+    The disconnected event will now include the same information as the
+    connected event.
 
-1.08  Mon Jul 13 15:33:34 BST 2009
-  - Added send_to_all_clients, a broadcast mechanism
+  commit 1c86e7a38ef289d9264f5f53f2fdb6bc7f527a40
+  Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
+  Date:   Wed Jul 7 11:41:00 2010 +0100
+  
+    Converted dist to Dist::Zilla using Dist::Zooky 
 
-1.06	Wed Jun 10 21:47:29 BST 2009
-	- Added client_wheel method to get at the erm client wheel
+==============================
+2010-03-20 08:39:20 +0000 1.10
+==============================
 
-1.04	Thu Apr 30 15:09:08 BST 2009
-	- Applied patch from Martijn van Beers that adds pause/resume 
-	  listening methods.
+  commit a68e2982ef8b1d6bd0874c744a24e1c42bc35745
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Sat Mar 20 08:39:20 2010 +0000
+  
+    Fixed listener being deleted on all operations failures. Added
+    'start_listener' mechanism 
 
-1.02	Tue Apr  7 21:10:28 BST 2009
-	- Make auto_set_repository() only run at author-time
+==============================
+2009-07-13 15:34:03 +0100 1.08
+==============================
 
-1.00	Mon Apr  6 22:56:27 BST 2009
-	- Bump version for 'stable' release
-	- add auto set repository to Makefile.PL
+  commit baef543c27fee34ec89fe0855da3157a554982d1
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Mon Jul 13 15:34:03 2009 +0100
+  
+    Prepared for CPAN Release
 
-0.18	Mon Feb  2 12:36:52 GMT 2009
-	- Fixed 10_prefix.t test on Cygwin
+  commit 6c62b356c7f401885ee17365742b0212b246d5a0
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Mon Jul 13 15:32:11 2009 +0100
+  
+    Added send_to_all_clients, a broadcast mechanism 
 
-0.16	Sat Jan 17 12:29:04 GMT 2009
-	- Fixed 07_synopsis.t test on Cygwin
-
-0.14	Thu Jan 15 09:43:58 GMT 2009
-	- Enabled 'prefix' to be specified.
-
-0.12	Tue Jul 29 11:18:53 BST 2008
-	- Provided a really simple synopsis.
-
-0.10	Tue May 20 17:33:15 BST 2008
-	- Added client_info() method.
-
-0.08	Fri May 16 10:24:37 BST 2008
-	- Documented passing an ARRAYREF to send_to_client.
-	- Added test for the above.
-
-0.06	Thu May 15 16:54:07 BST 2008
-	- updated authorship and licensing information
-
-0.04	Thu May 15 09:43:37 BST 2008
-	- Updated LICENSE file
-	- added 'terminate' method and input event.
-
-0.02	Wed May 14 21:42:39 BST 2008
-	- Initial CPAN release.
+===================================
+End of changes in the last 365 days
+===================================

@@ -1,21 +1,59 @@
-use 5.006;
+
 use strict;
-use inc::Module::Install;
-name 'Test-POE-Server-TCP';
-author 'Chris Williams <chris@bingosnet.co.uk>';
-version_from 'lib/Test/POE/Server/TCP.pm';
-abstract_from 'lib/Test/POE/Server/TCP.pm';
-readme_from 'lib/Test/POE/Server/TCP.pm';
-license 'perl';
-auto_license holder => 'Chris Williams, Rocco Caputo, Ann Barcomb and Jos Boumans';
-perl_version '5.006';
-build_requires 'Test::More' => 0.47;
-build_requires 'Text::ParseWords' => 0;
-requires 'POE' => 1.004;
-requires 'POE::Wheel::SocketFactory' => 0;
-requires 'POE::Filter::Line' => 0;
-requires 'POE::Wheel::ReadWrite' => 0;
-requires 'POE::Filter' => 0;
-auto_provides;
-githubmeta;
-WriteAll();
+use warnings;
+
+BEGIN { require v5.6.0; }
+
+use ExtUtils::MakeMaker 6.31;
+
+
+
+my %WriteMakefileArgs = (
+  'ABSTRACT' => 'A POE Component providing TCP server services for test cases',
+  'AUTHOR' => 'Chris Williams <chris@bingosnet.co.uk>',
+  'BUILD_REQUIRES' => {
+    'ExtUtils::MakeMaker' => '6.42',
+    'Test::More' => '0.47',
+    'Text::ParseWords' => '0'
+  },
+  'CONFIGURE_REQUIRES' => {
+    'ExtUtils::MakeMaker' => '6.42'
+  },
+  'DISTNAME' => 'Test-POE-Server-TCP',
+  'EXE_FILES' => [],
+  'LICENSE' => 'perl',
+  'NAME' => 'Test::POE::Server::TCP',
+  'PREREQ_PM' => {
+    'POE' => '1.004',
+    'POE::Filter' => '0',
+    'POE::Filter::Line' => '0',
+    'POE::Wheel::ReadWrite' => '0',
+    'POE::Wheel::SocketFactory' => '0'
+  },
+  'VERSION' => '1.12',
+  'test' => {
+    'TESTS' => 't/*.t'
+  }
+);
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+

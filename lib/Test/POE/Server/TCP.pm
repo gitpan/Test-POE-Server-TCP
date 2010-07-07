@@ -1,13 +1,15 @@
 package Test::POE::Server::TCP;
+BEGIN {
+  $Test::POE::Server::TCP::VERSION = '1.12';
+}
+
+# ABSTRACT: A POE Component providing TCP server services for test cases
 
 use strict;
 use warnings;
 use POE qw(Wheel::SocketFactory Wheel::ReadWrite Filter::Line);
 use Socket;
 use Carp qw(carp croak);
-use vars qw($VERSION);
-
-$VERSION = '1.10';
 
 sub spawn {
   my $package = shift;
@@ -278,8 +280,9 @@ sub _conn_input {
 sub _conn_error {
   my ($self,$errstr,$id) = @_[OBJECT,ARG2,ARG3];
   return unless $self->_conn_exists( $id );
-  delete $self->{clients}->{ $id };
-  $self->_send_event( $self->{_prefix} . 'disconnected', $id );
+  my $href = delete $self->{clients}->{ $id };
+  delete $href->{wheel};
+  $self->_send_event( $self->{_prefix} . 'disconnected', $id,  map { $href->{$_} } qw(peeraddr peerport sockaddr sockport) );
   return;
 }
 
@@ -401,11 +404,6 @@ sub __send_event {
   return;
 }
 
-#sub send_event {
-#  my $self = shift;
-#  $poe_kernel->post( $self->{session_id}, '__send_event', @_ );
-#}
-
 sub _send_event  {
   my $self = shift;
   my ($event, @args) = @_;
@@ -455,11 +453,17 @@ sub _send_to_all_clients {
 
 q{Putting the test into POE};
 
+
 __END__
+=pod
 
 =head1 NAME
 
 Test::POE::Server::TCP - A POE Component providing TCP server services for test cases
+
+=head1 VERSION
+
+version 1.12
 
 =head1 SYNOPSIS
 
@@ -659,7 +663,7 @@ communication with the component when sending data to the client or disconnectin
 
 =head1 CONSTRUCTOR
 
-=over 
+=over
 
 =item C<spawn>
 
@@ -778,7 +782,6 @@ Send some output to a connected client. First parameter must be a valid client i
 The second parameter may also be an arrayref of items to send to the client. If the filter you have used requires an arrayref as
 input, nest that arrayref within another arrayref.
 
-
 =item C<send_to_all_clients>
 
 Send some output to all connected clients. The parameter is a string of text to send.
@@ -827,12 +830,14 @@ ARG4 is our socket port.
 
 =item C<testd_disconnected>
 
-Generated whenever a client disconnects. ARG0 is the client ID.
+Generated whenever a client disconnects. ARG0 was the client ID, ARG1
+was the client's IP address, ARG2 was the client's TCP port. ARG3 was our IP address and
+ARG4 was our socket port.
 
 =item C<testd_client_input>
 
-Generated whenever a client sends us some traffic. ARG0 is the client ID, ARG1 is the data sent ( tokenised by whatever POE::Filter you 
-specified. 
+Generated whenever a client sends us some traffic. ARG0 is the client ID, ARG1 is the data sent 
+( tokenised by whatever POE::Filter you specified ).
 
 =item C<testd_client_flushed>
 
@@ -840,17 +845,9 @@ Generated whenever anything we send to the client is actually flushed down the '
 
 =back
 
-=head1 AUTHOR
+=head1 CREDITS
 
-Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
-
-with code borrowed from L<POE::Component::Server::TCP> by Rocco Caputo, Ann Barcomb and Jos Boumans.
-
-=head1 LICENSE
-
-Copyright E<copy> Chris Williams, Rocco Caputo, Ann Barcomb and Jos Boumans.
-
-This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
+This module uses code borrowed from L<POE::Component::Server::TCP> by Rocco Caputo, Ann Barcomb and Jos Boumans.
 
 =head1 SEE ALSO
 
@@ -858,4 +855,16 @@ L<POE>
 
 L<POE::Component::Server::TCP>
 
+=head1 AUTHOR
+
+Chris Williams <chris@bingosnet.co.uk>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Chris Williams, Rocco Caputo, Ann Barcomb and Jos Boumans.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
+

@@ -8,31 +8,21 @@ build_requires:
   Text::ParseWords: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.42
-distribution_type: module
-generated_by: 'Module::Install version 0.95'
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.101831, CPAN::Meta::Converter version 2.101670'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Test-POE-Server-TCP
-no_index:
-  directory:
-    - examples
-    - inc
-    - t
-provides:
-  Test::POE::Server::TCP:
-    file: lib/Test/POE/Server/TCP.pm
-    version: 1.10
 requires:
   POE: 1.004
   POE::Filter: 0
   POE::Filter::Line: 0
   POE::Wheel::ReadWrite: 0
   POE::Wheel::SocketFactory: 0
-  perl: 5.6.0
+  perl: v5.6.0
 resources:
   homepage: http://github.com/bingos/test-poe-server-tcp/tree
-  license: http://dev.perl.org/licenses/
   repository: git://github.com/bingos/test-poe-server-tcp.git
-version: 1.10
+version: 1.12
