@@ -3,7 +3,7 @@ NAME
     for test cases
 
 VERSION
-    version 1.12
+    version 1.14
 
 SYNOPSIS
     A very simple echo server with logging of requests by each client:

@@ -1,6 +1,6 @@
 package Test::POE::Server::TCP;
 BEGIN {
-  $Test::POE::Server::TCP::VERSION = '1.12';
+  $Test::POE::Server::TCP::VERSION = '1.14';
 }
 
 # ABSTRACT: A POE Component providing TCP server services for test cases
@@ -424,7 +424,7 @@ sub send_to_client {
 sub _send_to_client {
   my ($kernel,$self,$id,$output) = @_[KERNEL,OBJECT,ARG0..ARG1];
   return unless $self->_conn_exists( $id );
-  return unless $output;
+  return unless defined $output;
 
   if ( ref $output eq 'ARRAY' ) {
     my $temp = [ @{ $output } ];
@@ -445,7 +445,7 @@ sub send_to_all_clients {
 
 sub _send_to_all_clients {
   my ($kernel,$self,$output) = @_[KERNEL,OBJECT,ARG0];
-  return unless $output;
+  return unless defined $output;
   $self->send_to_client( $_, $output ) for
     keys %{ $self->{clients} };
   return 1;
@@ -463,7 +463,7 @@ Test::POE::Server::TCP - A POE Component providing TCP server services for test 
 
 =head1 VERSION
 
-version 1.12
+version 1.14
 
 =head1 SYNOPSIS
 

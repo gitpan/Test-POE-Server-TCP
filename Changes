@@ -1,4 +1,14 @@
 ==============================
+2010-07-19 14:40:55 +0100 1.14
+==============================
+
+  commit f5df5ac7dc5f5b6cbddaf127993870d26d9b2614
+  Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
+  Date:   Mon Jul 19 14:40:55 2010 +0100
+  
+    Check for definedness of stuff given to send to clients. 
+
+==============================
 2010-07-07 11:46:56 +0100 1.12
 ==============================
 
@@ -25,22 +35,6 @@
   
     Fixed listener being deleted on all operations failures. Added
     'start_listener' mechanism 
-
-==============================
-2009-07-13 15:34:03 +0100 1.08
-==============================
-
-  commit baef543c27fee34ec89fe0855da3157a554982d1
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Mon Jul 13 15:34:03 2009 +0100
-  
-    Prepared for CPAN Release
-
-  commit 6c62b356c7f401885ee17365742b0212b246d5a0
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Mon Jul 13 15:32:11 2009 +0100
-  
-    Added send_to_all_clients, a broadcast mechanism 
 
 ===================================
 End of changes in the last 365 days
