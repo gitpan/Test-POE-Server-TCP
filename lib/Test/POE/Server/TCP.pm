@@ -1,6 +1,6 @@
 package Test::POE::Server::TCP;
 BEGIN {
-  $Test::POE::Server::TCP::VERSION = '1.14';
+  $Test::POE::Server::TCP::VERSION = '1.16';
 }
 
 # ABSTRACT: A POE Component providing TCP server services for test cases
@@ -463,7 +463,7 @@ Test::POE::Server::TCP - A POE Component providing TCP server services for test 
 
 =head1 VERSION
 
-version 1.14
+version 1.16
 
 =head1 SYNOPSIS
 
@@ -861,7 +861,7 @@ Chris Williams <chris@bingosnet.co.uk>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Chris Williams, Rocco Caputo, Ann Barcomb and Jos Boumans.
+This software is copyright (c) 2011 by Chris Williams, Rocco Caputo, Ann Barcomb and Jos Boumans.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

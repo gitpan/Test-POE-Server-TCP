@@ -2,9 +2,9 @@
 use strict;
 use warnings;
 
-BEGIN { require v5.6.0; }
+use 5.006000;
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
@@ -12,12 +12,11 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'A POE Component providing TCP server services for test cases',
   'AUTHOR' => 'Chris Williams <chris@bingosnet.co.uk>',
   'BUILD_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.42',
     'Test::More' => '0.47',
     'Text::ParseWords' => '0'
   },
   'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.42'
+    'ExtUtils::MakeMaker' => '6.30'
   },
   'DISTNAME' => 'Test-POE-Server-TCP',
   'EXE_FILES' => [],
@@ -30,7 +29,7 @@ my %WriteMakefileArgs = (
     'POE::Wheel::ReadWrite' => '0',
     'POE::Wheel::SocketFactory' => '0'
   },
-  'VERSION' => '1.14',
+  'VERSION' => '1.16',
   'test' => {
     'TESTS' => 't/*.t'
   }

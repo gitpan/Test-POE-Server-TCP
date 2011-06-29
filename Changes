@@ -1,4 +1,21 @@
 ==============================
+2011-06-29 10:03:36 +0100 1.16
+==============================
+
+  commit e4ffebf034a67b0a7b6f3ead2bd9bad38c512ed0
+  Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
+  Date:   Wed Jun 29 09:54:20 2011 +0100
+  
+    Resolve [rt.cpan.org #69175] "Test-POE-Server-TCP-1.14 stuck in test
+    on Strawberry Perl 5.12.3"
+
+    Made the explicit socket shutdown for 'cygwin' applicable to MSWin32
+    as well. I was able to reproduce the issue with:
+
+    This is perl 5, version 14, subversion 1 (v5.14.1) built for
+    MSWin32-x64-multi-thread 
+
+==============================
 2010-07-19 14:40:55 +0100 1.14
 ==============================
 
@@ -36,6 +53,65 @@
     Fixed listener being deleted on all operations failures. Added
     'start_listener' mechanism 
 
-===================================
-End of changes in the last 365 days
-===================================
+==============================
+2009-07-13 15:34:03 +0100 1.08
+==============================
+
+  commit baef543c27fee34ec89fe0855da3157a554982d1
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Mon Jul 13 15:34:03 2009 +0100
+  
+    Prepared for CPAN Release
+
+  commit 6c62b356c7f401885ee17365742b0212b246d5a0
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Mon Jul 13 15:32:11 2009 +0100
+  
+    Added send_to_all_clients, a broadcast mechanism 
+
+==============================
+2009-06-10 21:48:30 +0100 1.06
+==============================
+
+  commit 937ba14b981953feb65c2e22f53af740f8e457e4
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Wed Jun 10 21:48:30 2009 +0100
+  
+    Added client_wheel method to get at the erm client wheel 
+
+==============================
+2009-04-30 15:13:03 +0100 1.04
+==============================
+
+  commit 266eb20f1e33e7dd57d1156d1d779663a62bdbef
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Thu Apr 30 15:13:03 2009 +0100
+  
+    Fixed up the pause/resume test and added to the MANIFEST
+
+  commit bf740a86d98b99a7de0604b0d359e72a3c7d1047
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Thu Apr 30 15:10:00 2009 +0100
+  
+    Removed the .orig file after the patching
+
+  commit c566b90d1c5a374f7676f47b03ab01ccf9f2f8d5
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Thu Apr 30 15:09:29 2009 +0100
+  
+    Applied patch from Martijn van Beers that adds pause/resume listening
+    methods. 
+
+==============================
+2009-04-07 21:11:03 +0100 1.02
+==============================
+
+  commit 562c26091f74eca2bc5fd2f8de234fb18d58613a
+  Author: Chris Williams <chris@bingosnet.co.uk>
+  Date:   Tue Apr 7 21:11:03 2009 +0100
+  
+    Make auto_set_repository() only run at author-time 
+
+====================================
+End of changes in the last 1825 days
+====================================

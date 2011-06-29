@@ -3,7 +3,7 @@ NAME
     for test cases
 
 VERSION
-    version 1.14
+    version 1.16
 
 SYNOPSIS
     A very simple echo server with logging of requests by each client:
@@ -388,7 +388,7 @@ AUTHOR
     Chris Williams <chris@bingosnet.co.uk>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2010 by Chris Williams, Rocco Caputo, Ann
+    This software is copyright (c) 2011 by Chris Williams, Rocco Caputo, Ann
     Barcomb and Jos Boumans.
 
     This is free software; you can redistribute it and/or modify it under
