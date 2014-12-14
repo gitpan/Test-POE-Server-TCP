@@ -1,11 +1,25 @@
-==============================
-2011-06-29 10:03:36 +0100 1.16
-==============================
+==================================================
+Changes from 2009-12-15 00:00:00 +0000 to present.
+==================================================
 
-  commit e4ffebf034a67b0a7b6f3ead2bd9bad38c512ed0
+-----------------------------------------
+version 1.18 at 2014-12-14 19:04:59 +0000
+-----------------------------------------
+
+  Change: 80e33094eb45214e39d5aaf25a163751f3649730
   Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
-  Date:   Wed Jun 29 09:54:20 2011 +0100
-  
+  Date : 2014-12-14 19:04:59 +0000
+
+    Correct the code in the first SYNPOSIS 
+
+-----------------------------------------
+version 1.16 at 2011-06-29 09:03:36 +0000
+-----------------------------------------
+
+  Change: e4ffebf034a67b0a7b6f3ead2bd9bad38c512ed0
+  Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
+  Date : 2011-06-29 10:03:36 +0000
+
     Resolve [rt.cpan.org #69175] "Test-POE-Server-TCP-1.14 stuck in test
     on Strawberry Perl 5.12.3"
 
@@ -15,103 +29,44 @@
     This is perl 5, version 14, subversion 1 (v5.14.1) built for
     MSWin32-x64-multi-thread 
 
-==============================
-2010-07-19 14:40:55 +0100 1.14
-==============================
+-----------------------------------------
+version 1.14 at 2010-07-19 13:40:55 +0000
+-----------------------------------------
 
-  commit f5df5ac7dc5f5b6cbddaf127993870d26d9b2614
+  Change: f5df5ac7dc5f5b6cbddaf127993870d26d9b2614
   Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
-  Date:   Mon Jul 19 14:40:55 2010 +0100
-  
+  Date : 2010-07-19 14:40:55 +0000
+
     Check for definedness of stuff given to send to clients. 
 
-==============================
-2010-07-07 11:46:56 +0100 1.12
-==============================
+-----------------------------------------
+version 1.12 at 2010-07-07 10:46:56 +0000
+-----------------------------------------
 
-  commit 38faf9bb17668dac118fa4d841e19962d32b1de9
+  Change: 38faf9bb17668dac118fa4d841e19962d32b1de9
   Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
-  Date:   Wed Jul 7 11:46:56 2010 +0100
-  
+  Date : 2010-07-07 11:46:56 +0000
+
     The disconnected event will now include the same information as the
-    connected event.
+    connected event. 
 
-  commit 1c86e7a38ef289d9264f5f53f2fdb6bc7f527a40
+  Change: 1c86e7a38ef289d9264f5f53f2fdb6bc7f527a40
   Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
-  Date:   Wed Jul 7 11:41:00 2010 +0100
-  
+  Date : 2010-07-07 11:41:00 +0000
+
     Converted dist to Dist::Zilla using Dist::Zooky 
 
-==============================
-2010-03-20 08:39:20 +0000 1.10
-==============================
+-----------------------------------------
+version 1.10 at 2010-03-20 08:39:20 +0000
+-----------------------------------------
 
-  commit a68e2982ef8b1d6bd0874c744a24e1c42bc35745
+  Change: a68e2982ef8b1d6bd0874c744a24e1c42bc35745
   Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Sat Mar 20 08:39:20 2010 +0000
-  
+  Date : 2010-03-20 08:39:20 +0000
+
     Fixed listener being deleted on all operations failures. Added
     'start_listener' mechanism 
 
-==============================
-2009-07-13 15:34:03 +0100 1.08
-==============================
-
-  commit baef543c27fee34ec89fe0855da3157a554982d1
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Mon Jul 13 15:34:03 2009 +0100
-  
-    Prepared for CPAN Release
-
-  commit 6c62b356c7f401885ee17365742b0212b246d5a0
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Mon Jul 13 15:32:11 2009 +0100
-  
-    Added send_to_all_clients, a broadcast mechanism 
-
-==============================
-2009-06-10 21:48:30 +0100 1.06
-==============================
-
-  commit 937ba14b981953feb65c2e22f53af740f8e457e4
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Wed Jun 10 21:48:30 2009 +0100
-  
-    Added client_wheel method to get at the erm client wheel 
-
-==============================
-2009-04-30 15:13:03 +0100 1.04
-==============================
-
-  commit 266eb20f1e33e7dd57d1156d1d779663a62bdbef
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Thu Apr 30 15:13:03 2009 +0100
-  
-    Fixed up the pause/resume test and added to the MANIFEST
-
-  commit bf740a86d98b99a7de0604b0d359e72a3c7d1047
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Thu Apr 30 15:10:00 2009 +0100
-  
-    Removed the .orig file after the patching
-
-  commit c566b90d1c5a374f7676f47b03ab01ccf9f2f8d5
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Thu Apr 30 15:09:29 2009 +0100
-  
-    Applied patch from Martijn van Beers that adds pause/resume listening
-    methods. 
-
-==============================
-2009-04-07 21:11:03 +0100 1.02
-==============================
-
-  commit 562c26091f74eca2bc5fd2f8de234fb18d58613a
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Tue Apr 7 21:11:03 2009 +0100
-  
-    Make auto_set_repository() only run at author-time 
-
-====================================
-End of changes in the last 1825 days
-====================================
+================================================
+Plus 5 releases after 2009-12-15 00:00:00 +0000.
+================================================

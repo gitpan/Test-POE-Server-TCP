@@ -1,8 +1,5 @@
 package Test::POE::Server::TCP;
-BEGIN {
-  $Test::POE::Server::TCP::VERSION = '1.16';
-}
-
+$Test::POE::Server::TCP::VERSION = '1.18';
 # ABSTRACT: A POE Component providing TCP server services for test cases
 
 use strict;
@@ -453,9 +450,11 @@ sub _send_to_all_clients {
 
 q{Putting the test into POE};
 
-
 __END__
+
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -463,7 +462,7 @@ Test::POE::Server::TCP - A POE Component providing TCP server services for test 
 
 =head1 VERSION
 
-version 1.16
+version 1.18
 
 =head1 SYNOPSIS
 
@@ -513,7 +512,7 @@ A very simple echo server with logging of requests by each client:
      # The client sent us a line of input
      # lets store it
 
-     push @{ $heap->{clients}->{ $id }, $input;
+     push @{ $heap->{clients}->{ $id } }, $input;
 
      # Okay, we are an echo server so lets send it back to the client
      # We know the SENDER so can always obtain the server object.
@@ -861,10 +860,9 @@ Chris Williams <chris@bingosnet.co.uk>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Chris Williams, Rocco Caputo, Ann Barcomb and Jos Boumans.
+This software is copyright (c) 2014 by Chris Williams, Rocco Caputo, Ann Barcomb and Jos Boumans.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
